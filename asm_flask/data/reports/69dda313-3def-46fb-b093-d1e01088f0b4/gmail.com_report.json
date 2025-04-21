@@ -1,0 +1,668 @@
+{
+  "domain": "gmail.com",
+  "scan_date": "2025-04-21",
+  "risk_score": 95,
+  "risk_summary": "The domain gmail.com has critical security vulnerabilities that require immediate attention. The attack surface is significantly exposed with multiple high-severity issues that could lead to system compromise. Urgent remediation is necessary to prevent potential breaches.",
+  "subdomains": [
+    {
+      "hostname": "m.gmail.com",
+      "is_live": true
+    },
+    {
+      "hostname": "smtp.gmail.com",
+      "is_live": true
+    },
+    {
+      "hostname": "www.gmail.com",
+      "is_live": true
+    }
+  ],
+  "dns_records": {
+    "A": [
+      "142.250.183.5"
+    ],
+    "AAAA": [
+      "2404:6800:4009:807::2005"
+    ],
+    "MX": [
+      "10 alt1.gmail-smtp-in.l.google.com.",
+      "30 alt3.gmail-smtp-in.l.google.com.",
+      "5 gmail-smtp-in.l.google.com.",
+      "40 alt4.gmail-smtp-in.l.google.com.",
+      "20 alt2.gmail-smtp-in.l.google.com."
+    ],
+    "NS": [
+      "ns2.google.com.",
+      "ns3.google.com.",
+      "ns4.google.com.",
+      "ns1.google.com."
+    ],
+    "TXT": [
+      "\"v=spf1 redirect=_spf.google.com\"",
+      "\"globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8=\""
+    ],
+    "SOA": [
+      "ns1.google.com. dns-admin.google.com. 749513245 900 900 1800 60"
+    ],
+    "CNAME": [],
+    "SPF": [
+      "\"v=spf1 redirect=_spf.google.com\""
+    ],
+    "DKIM": [],
+    "DMARC": [
+      "\"v=DMARC1; p=none; sp=quarantine; rua=mailto:mailauth-reports@google.com\""
+    ]
+  },
+  "open_ports": [],
+  "tech_stack": [],
+  "headers": {
+    "target": "gmail.com",
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Frame-Options": "DENY",
+      "Vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "x-auto-login": "realm=com.google&args=service%3Dmail%26continue%3Dhttps://mail.google.com/mail/u/0/",
+      "Link": "<https://workspace.google.com/gmail/>; rel=\"canonical\"",
+      "x-ua-compatible": "IE=edge",
+      "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "Mon, 01 Jan 1990 00:00:00 GMT",
+      "Date": "Mon, 21 Apr 2025 05:53:20 GMT",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "Content-Security-Policy": "require-trusted-types-for 'script';report-uri /v3/signin/_/AccountsSignInUi/cspreport, script-src 'report-sample' 'nonce-xgC3ycyzjeWLV5JzekPnFA' 'unsafe-inline';object-src 'none';base-uri 'self';report-uri /v3/signin/_/AccountsSignInUi/cspreport;worker-src 'self', script-src 'unsafe-inline' 'unsafe-eval' blob: data: 'self' https://apis.google.com https://ssl.gstatic.com https://www.google.com https://www.googletagmanager.com https://www.gstatic.com https://www.google-analytics.com https://support.google.com/inapp/ https://www.google.com/tools/feedback/ https://www.gstatic.com/inproduct_help/ https://www.gstatic.com/support/content/;report-uri /v3/signin/_/AccountsSignInUi/cspreport/allowlist",
+      "Cross-Origin-Opener-Policy-Report-Only": "same-origin; report-to=\"AccountsSignInUi\"",
+      "Cross-Origin-Resource-Policy": "same-site",
+      "Content-Security-Policy-Report-Only": "script-src 'unsafe-inline' 'unsafe-eval' blob: data: https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js https://translate.google.com/translate_a/element.js https://www.google.com/recaptcha/api.js https://www.google.com/tools/feedback/load.js https://www.google.com/tools/feedback/open.js https://www.google.com/tools/feedback/open_to_help_guide_lazy.js https://www.google.com/tools/feedback/help_api.js https://www.gstatic.com/inproduct_help/service/lazy.min.js https://www.gstatic.com/inproduct_help/api/main.min.js https://www.gstatic.com/inproduct_help/chatsupport/chatsupport_button_v2.js https://www.gstatic.com/feedback/js/help/prod/service/lazy.min.js https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.google.com/tools/feedback/chat_load.js https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://www.gstatic.com/feedback/js/ghelp/ https://www.gstatic.com/_/mss/boq-one-google/_/ https://www.gstatic.com/og/_/js/ https://apis.google.com/js/api.js https://apis.google.com/js/client.js https://www.googletagmanager.com/gtag/js https://www.google-analytics.com/analytics.js https://www.googletagmanager.com/gtag/destination https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.en_US.HoV617kzoiE.es5.O/ https://apis.google.com/_/scs/abc-static/_/js/ https://translate.googleapis.com/_/translate_http/_/js/ https://www.gstatic.com/recaptcha/releases/;report-uri /v3/signin/_/AccountsSignInUi/cspreport/fine-allowlist",
+      "Accept-CH": "Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Model, Sec-CH-UA-WoW64, Sec-CH-UA-Form-Factors, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version",
+      "Report-To": "{\"group\":\"AccountsSignInUi\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/AccountsSignInUi\"}]}",
+      "Permissions-Policy": "ch-ua-arch=*, ch-ua-bitness=*, ch-ua-full-version=*, ch-ua-full-version-list=*, ch-ua-model=*, ch-ua-wow64=*, ch-ua-form-factors=*, ch-ua-platform=*, ch-ua-platform-version=*",
+      "reporting-endpoints": "default=\"/v3/signin/_/AccountsSignInUi/web-reports?context=eJwNwzFIAmEYBmD54YuwhgiHsKGQhorKUxJrcLiiHFoaCpdCE88UQk3PoDW6QaJByAxpEIMCoaEpsgSDgibTO8_LPeQMHGxwrfeBx3jFZo1mw_q02VC2lBi_-83WcKfYZj7s-nTWQ0nSWQovhzssh2-PHfaB23qWBJRaVcqg_f6TVvDJVKMyuoo14jHkq9MB_sbq1EfbpEw8PjtlqmA0J1MCr19kyuP4skIT6PYotIGttEI3FwrdYdrUoAzGxxp0gjNLDZrH7qlKPWxLKv2gP69SEDcrKm3hvqdJhUKTbtFl1ojH1JRG52h90Oj1T6N3XO1_kRtHhwZrpWxlYESvns1ZrP7ooTccECJiWDwOxqMRUYgE9pJiKBlOCPEjIe61c3YHt2hzLHBOb4z7B2w9lLw\"",
+      "Content-Encoding": "gzip",
+      "Server": "ESF",
+      "X-XSS-Protection": "0",
+      "X-Content-Type-Options": "nosniff",
+      "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "Transfer-Encoding": "chunked"
+    },
+    "missing_headers": [
+      "referrer-policy",
+      "clear-site-data",
+      "cross-origin-embedder-policy",
+      "cross-origin-opener-policy",
+      "access-control-allow-origin",
+      "x-powered-by"
+    ],
+    "insecure_headers": [
+      "server: ESF"
+    ],
+    "score": 52,
+    "max_score": 72,
+    "grade": "B-"
+  },
+  "ssl_info": {
+    "target": "gmail.com",
+    "port": 443,
+    "has_ssl": true,
+    "certificate": {
+      "subject": {},
+      "issuer": {},
+      "version": null,
+      "serial_number": null,
+      "not_before": null,
+      "not_after": null,
+      "expired": true,
+      "self_signed": true,
+      "signature_algorithm": "TLS_AES_256_GCM_SHA384",
+      "public_key_algorithm": null,
+      "key_size": null,
+      "san": []
+    },
+    "protocols": {
+      "SSLv2": false,
+      "SSLv3": false,
+      "TLSv1": false,
+      "TLSv1.1": false,
+      "TLSv1.2": true,
+      "TLSv1.3": true
+    },
+    "cipher_suites": [
+      "TLS_AES_256_GCM_SHA384",
+      "ECDHE-RSA-AES128-GCM-SHA256"
+    ],
+    "vulnerabilities": [
+      "expired_certificate",
+      "self_signed_certificate"
+    ],
+    "grade": "D",
+    "issues": [
+      "Certificate has expired",
+      "Self-signed certificate detected"
+    ]
+  },
+  "osint_findings": {
+    "domain": "gmail.com",
+    "emails_found": [
+      "admin@gmail.com",
+      "contact@gmail.com",
+      "david.g@gmail.com",
+      "david.gmail@gmail.com",
+      "david@gmail.com",
+      "david_gmail@gmail.com",
+      "davidgmail@gmail.com",
+      "help@gmail.com",
+      "hostmaster@gmail.com",
+      "info@gmail.com",
+      "james.g@gmail.com",
+      "james.gmail@gmail.com",
+      "james@gmail.com",
+      "james_gmail@gmail.com",
+      "jamesgmail@gmail.com",
+      "jane.g@gmail.com",
+      "jane.gmail@gmail.com",
+      "jane@gmail.com",
+      "jane_gmail@gmail.com",
+      "janegmail@gmail.com",
+      "john.g@gmail.com",
+      "john.gmail@gmail.com",
+      "john@gmail.com",
+      "john_gmail@gmail.com",
+      "johngmail@gmail.com",
+      "lisa.g@gmail.com",
+      "lisa.gmail@gmail.com",
+      "lisa@gmail.com",
+      "lisa_gmail@gmail.com",
+      "lisagmail@gmail.com",
+      "michael.g@gmail.com",
+      "michael.gmail@gmail.com",
+      "michael@gmail.com",
+      "michael_gmail@gmail.com",
+      "michaelgmail@gmail.com",
+      "postmaster@gmail.com",
+      "robert.g@gmail.com",
+      "robert.gmail@gmail.com",
+      "robert@gmail.com",
+      "robert_gmail@gmail.com",
+      "robertgmail@gmail.com",
+      "sales@gmail.com",
+      "sarah.g@gmail.com",
+      "sarah.gmail@gmail.com",
+      "sarah@gmail.com",
+      "sarah_gmail@gmail.com",
+      "sarahgmail@gmail.com",
+      "security@gmail.com",
+      "support@gmail.com",
+      "webmaster@gmail.com"
+    ],
+    "breaches": [
+      {
+        "breach_id": "breach_f74d39fa_0",
+        "title": "Simulated Breach 1",
+        "domain": "gmail.com",
+        "breach_date": "2020-01-13",
+        "added_date": "2020-01-13",
+        "modified_date": "2020-01-13",
+        "description": "This is a simulated breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords",
+          "Names"
+        ],
+        "source": "Have I Been Pwned (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "breach_f74d39fa_1",
+        "title": "Simulated Breach 2",
+        "domain": "gmail.com",
+        "breach_date": "2020-02-15",
+        "added_date": "2020-02-15",
+        "modified_date": "2020-02-15",
+        "description": "This is a simulated breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords",
+          "Names"
+        ],
+        "source": "Have I Been Pwned (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "breach_f74d39fa_2",
+        "title": "Simulated Breach 3",
+        "domain": "gmail.com",
+        "breach_date": "2020-03-17",
+        "added_date": "2020-03-17",
+        "modified_date": "2020-03-17",
+        "description": "This is a simulated breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords",
+          "Names"
+        ],
+        "source": "Have I Been Pwned (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_b34c0360_0",
+        "title": "Email Breach 1",
+        "email": "jane.g@gmail.com",
+        "breach_date": "2019-09-09",
+        "added_date": "2019-09-09",
+        "modified_date": "2019-09-09",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_b34c0360_1",
+        "title": "Email Breach 2",
+        "email": "jane.g@gmail.com",
+        "breach_date": "2019-10-12",
+        "added_date": "2019-10-12",
+        "modified_date": "2019-10-12",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_b34c0360_2",
+        "title": "Email Breach 3",
+        "email": "jane.g@gmail.com",
+        "breach_date": "2019-11-15",
+        "added_date": "2019-11-15",
+        "modified_date": "2019-11-15",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_82483563_0",
+        "title": "Email Breach 1",
+        "email": "john.gmail@gmail.com",
+        "breach_date": "2019-01-13",
+        "added_date": "2019-01-13",
+        "modified_date": "2019-01-13",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_f3c52e5e_0",
+        "title": "Email Breach 1",
+        "email": "david@gmail.com",
+        "breach_date": "2019-01-13",
+        "added_date": "2019-01-13",
+        "modified_date": "2019-01-13",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_1a305935_0",
+        "title": "Email Breach 1",
+        "email": "johngmail@gmail.com",
+        "breach_date": "2019-01-01",
+        "added_date": "2019-01-01",
+        "modified_date": "2019-01-01",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_67dd0f2e_0",
+        "title": "Email Breach 1",
+        "email": "sarah_gmail@gmail.com",
+        "breach_date": "2019-01-01",
+        "added_date": "2019-01-01",
+        "modified_date": "2019-01-01",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_9999a35a_0",
+        "title": "Email Breach 1",
+        "email": "support@gmail.com",
+        "breach_date": "2019-01-13",
+        "added_date": "2019-01-13",
+        "modified_date": "2019-01-13",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_75d23af4_0",
+        "title": "Email Breach 1",
+        "email": "admin@gmail.com",
+        "breach_date": "2019-01-01",
+        "added_date": "2019-01-01",
+        "modified_date": "2019-01-01",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_0406e521_0",
+        "title": "Email Breach 1",
+        "email": "robert_gmail@gmail.com",
+        "breach_date": "2019-05-05",
+        "added_date": "2019-05-05",
+        "modified_date": "2019-05-05",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_0406e521_1",
+        "title": "Email Breach 2",
+        "email": "robert_gmail@gmail.com",
+        "breach_date": "2019-06-08",
+        "added_date": "2019-06-08",
+        "modified_date": "2019-06-08",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_283135db_0",
+        "title": "Email Breach 1",
+        "email": "hostmaster@gmail.com",
+        "breach_date": "2019-05-05",
+        "added_date": "2019-05-05",
+        "modified_date": "2019-05-05",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_283135db_1",
+        "title": "Email Breach 2",
+        "email": "hostmaster@gmail.com",
+        "breach_date": "2019-06-08",
+        "added_date": "2019-06-08",
+        "modified_date": "2019-06-08",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_b26407fd_0",
+        "title": "Email Breach 1",
+        "email": "jane@gmail.com",
+        "breach_date": "2019-05-05",
+        "added_date": "2019-05-05",
+        "modified_date": "2019-05-05",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_b26407fd_1",
+        "title": "Email Breach 2",
+        "email": "jane@gmail.com",
+        "breach_date": "2019-06-08",
+        "added_date": "2019-06-08",
+        "modified_date": "2019-06-08",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_1f9d9a9e_0",
+        "title": "Email Breach 1",
+        "email": "john@gmail.com",
+        "breach_date": "2019-01-13",
+        "added_date": "2019-01-13",
+        "modified_date": "2019-01-13",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_1caf5051_0",
+        "title": "Email Breach 1",
+        "email": "michael.g@gmail.com",
+        "breach_date": "2019-09-09",
+        "added_date": "2019-09-09",
+        "modified_date": "2019-09-09",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_1caf5051_1",
+        "title": "Email Breach 2",
+        "email": "michael.g@gmail.com",
+        "breach_date": "2019-10-12",
+        "added_date": "2019-10-12",
+        "modified_date": "2019-10-12",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_1caf5051_2",
+        "title": "Email Breach 3",
+        "email": "michael.g@gmail.com",
+        "breach_date": "2019-11-15",
+        "added_date": "2019-11-15",
+        "modified_date": "2019-11-15",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_2c20acb2_0",
+        "title": "Email Breach 1",
+        "email": "sales@gmail.com",
+        "breach_date": "2019-05-05",
+        "added_date": "2019-05-05",
+        "modified_date": "2019-05-05",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_2c20acb2_1",
+        "title": "Email Breach 2",
+        "email": "sales@gmail.com",
+        "breach_date": "2019-06-08",
+        "added_date": "2019-06-08",
+        "modified_date": "2019-06-08",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      }
+    ],
+    "breach_count": 24,
+    "data_sources": [
+      "Domain breach check",
+      "Email breach check"
+    ]
+  },
+  "sensitive_paths": [
+    {
+      "path": "robots.txt",
+      "url": "https://gmail.com/robots.txt",
+      "status_code": 200,
+      "content_type": "text/plain",
+      "title": "Unknown",
+      "content_length": 129,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "api",
+      "url": "https://gmail.com/api",
+      "status_code": 301,
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Unknown",
+      "content_length": 221,
+      "sensitivity": "medium"
+    }
+  ],
+  "risk_details": [
+    {
+      "category": "OSINT",
+      "title": "Data breaches detected",
+      "description": "Found 24 data breaches involving the domain or associated emails",
+      "severity": "Critical",
+      "affected_assets": [
+        "Simulated Breach 1",
+        "Simulated Breach 2",
+        "Simulated Breach 3",
+        "Email Breach 1",
+        "Email Breach 2"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Expired SSL certificate",
+      "description": "SSL certificate has expired",
+      "severity": "Critical",
+      "affected_assets": [
+        "gmail.com"
+      ]
+    },
+    {
+      "category": "OSINT",
+      "title": "Credential leaks detected",
+      "description": "Credentials have been exposed in data breaches",
+      "severity": "Critical",
+      "affected_assets": [
+        "Simulated Breach 1",
+        "Simulated Breach 2",
+        "Simulated Breach 3",
+        "Email Breach 1",
+        "Email Breach 2",
+        "Email Breach 3",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 2",
+        "Email Breach 1",
+        "Email Breach 2",
+        "Email Breach 1",
+        "Email Breach 2",
+        "Email Breach 1",
+        "Email Breach 1",
+        "Email Breach 2",
+        "Email Breach 3",
+        "Email Breach 1",
+        "Email Breach 2"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Self-signed SSL certificate",
+      "description": "Self-signed certificates are not trusted by browsers",
+      "severity": "High",
+      "affected_assets": [
+        "gmail.com"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Poor SSL/TLS configuration",
+      "description": "SSL/TLS configuration received a grade of D",
+      "severity": "Medium",
+      "affected_assets": [
+        "gmail.com"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Immediately restrict access to administrative interfaces using IP filtering or VPN requirements",
+    "Update or patch all services with known vulnerabilities, or place them behind a properly configured firewall",
+    "Replace expired SSL certificates with valid ones from trusted certificate authorities",
+    "Implement all missing security headers, particularly HSTS, CSP, and X-Frame-Options",
+    "Force password resets for all accounts and implement multi-factor authentication"
+  ]
+}

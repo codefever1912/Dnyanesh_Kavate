@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASM Report: youtube.com</title>
+    <style>
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
+            --info-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 0;
+            margin: 0;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin-bottom: 1rem;
+        }
+        
+        .report-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            overflow: hidden;
+        }
+        
+        section h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            transition: transform 0.3s;
+        }
+        
+        section.collapsed h2::after {
+            transform: rotate(-90deg);
+        }
+        
+        section.collapsed > *:not(h2) {
+            display: none;
+        }
+        
+        h3 {
+            margin: 1rem 0;
+            color: var(--primary-color);
+        }
+        
+        h4 {
+            margin: 0.8rem 0;
+            color: var(--primary-color);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .risk-item {
+            border-left: 3px solid var(--border-color);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .risk-category {
+            margin-bottom: 2rem;
+        }
+        
+        .severity {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .critical {
+            background-color: var(--error-color);
+            color: white;
+        }
+        
+        .high {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .medium {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .low {
+            background-color: #74b9ff;
+            color: white;
+        }
+        
+        .info {
+            background-color: #a29bfe;
+            color: white;
+        }
+        
+        .grade {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .grade-a {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .grade-b {
+            background-color: #74b9ff;
+            color: white;
+        }
+        
+        .grade-c {
+            background-color: var(--warning-color);
+            color: white;
+        }
+        
+        .grade-d, .grade-f {
+            background-color: var(--error-color);
+            color: white;
+        }
+        
+        .live {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .inactive {
+            color: var(--error-color);
+        }
+        
+        .success {
+            color: var(--success-color);
+        }
+        
+        .warning {
+            color: var(--warning-color);
+        }
+        
+        .error {
+            color: var(--error-color);
+        }
+        
+        .error-list li {
+            color: var(--error-color);
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tech-list, .email-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tech-badge, .email-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+        
+        .email-badge.more {
+            background-color: var(--primary-color);
+        }
+        
+        .breach-item {
+            background-color: rgba(0,0,0,0.02);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .affected-assets {
+            background-color: rgba(0,0,0,0.02);
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+        }
+        
+        .affected-assets h5 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .affected-assets ul {
+            margin-left: 1.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .report-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            section {
+                padding: 1rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Attack Surface Monitoring Report: youtube.com</h1>
+        <div class="report-meta">
+            <p><strong>Scan Date:</strong> 2025-04-21</p>
+            <p><strong>Risk Score:</strong> <span class="critical">95/100</span></p>
+        </div>
+    </header>
+    <main>
+        <section class="summary">
+            <h2>Executive Summary</h2>
+            <p>The domain youtube.com has critical security vulnerabilities that require immediate attention. The attack surface is significantly exposed with multiple high-severity issues that could lead to system compromise. Urgent remediation is necessary to prevent potential breaches.</p>
+        </section>
+        <section class="recommendations">
+            <h2>Key Recommendations</h2>
+            <ol>
+                <li>Immediately restrict access to administrative interfaces using IP filtering or VPN requirements</li>
+                <li>Update or patch all services with known vulnerabilities, or place them behind a properly configured firewall</li>
+                <li>Replace expired SSL certificates with valid ones from trusted certificate authorities</li>
+                <li>Implement all missing security headers, particularly HSTS, CSP, and X-Frame-Options</li>
+                <li>Force password resets for all accounts and implement multi-factor authentication</li>
+            </ol>
+        </section>
+        <section class="risk-details">
+            <h2>Risk Details</h2>
+            <div class="risk-category">
+                <h3>Sensitive Paths Risks</h3>
+                <div class="risk-item">
+                    <h4>Multiple sensitive paths exposed <span class="severity critical">Critical</span></h4>
+                    <p>Found 48 sensitive paths or directories</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>login</li>
+                            <li>dashboard</li>
+                            <li>wp-content</li>
+                            <li>admin</li>
+                            <li>backups</li>
+                            <li>wp-admin</li>
+                            <li>backup</li>
+                            <li>administrator</li>
+                            <li>phpmyadmin</li>
+                            <li>data</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <h4>Highly sensitive paths exposed <span class="severity critical">Critical</span></h4>
+                    <p>Paths with high sensitivity are accessible</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>login</li>
+                            <li>admin</li>
+                            <li>backups</li>
+                            <li>wp-admin</li>
+                            <li>backup</li>
+                            <li>administrator</li>
+                            <li>phpmyadmin</li>
+                            <li>db</li>
+                            <li>configuration</li>
+                            <li>mysql</li>
+                            <li>... and 5 more</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="risk-category">
+                <h3>OSINT Risks</h3>
+                <div class="risk-item">
+                    <h4>Data breaches detected <span class="severity critical">Critical</span></h4>
+                    <p>Found 12 data breaches involving the domain or associated emails</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 2</li>
+                            <li>Email Breach 3</li>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <h4>Credential leaks detected <span class="severity critical">Critical</span></h4>
+                    <p>Credentials have been exposed in data breaches</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 2</li>
+                            <li>Email Breach 3</li>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 2</li>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 1</li>
+                            <li>Email Breach 2</li>
+                            <li>Email Breach 1</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="risk-category">
+                <h3>SSL/TLS Risks</h3>
+                <div class="risk-item">
+                    <h4>Expired SSL certificate <span class="severity critical">Critical</span></h4>
+                    <p>SSL certificate has expired</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>youtube.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <h4>Self-signed SSL certificate <span class="severity high">High</span></h4>
+                    <p>Self-signed certificates are not trusted by browsers</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>youtube.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <h4>Poor SSL/TLS configuration <span class="severity medium">Medium</span></h4>
+                    <p>SSL/TLS configuration received a grade of D</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>youtube.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="risk-category">
+                <h3>Subdomain Risks</h3>
+                <div class="risk-item">
+                    <h4>Large number of subdomains <span class="severity low">Low</span></h4>
+                    <p>Found 26 subdomains, increasing the attack surface</p>
+                    <div class="affected-assets">
+                        <h5>Affected Assets:</h5>
+                        <ul>
+                            <li>26 subdomains</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="subdomains">
+            <h2>Subdomains</h2>
+            <p>Discovered 26 subdomains:</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subdomain</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>admin.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>ads.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>app.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache1.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache2.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache3.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache4.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache5.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache6.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache7.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cache8.c.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cctldtest.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cms.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>cyc.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>gdata.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>m.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>misc-sni.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>mx.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>news.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>partner.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>sandbox.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>uberproxy-san.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>upload.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>uploads.stage.gdata.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                        <tr>
+                            <td>www.youtube.com</td>
+                            <td class="live">Live</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="tech-stack">
+            <h2>Technology Stack</h2>
+            <div class="tech-list">
+                <span class="tech-badge">react</span>
+            </div>
+        </section>
+        <section class="ssl-info">
+            <h2>SSL/TLS Configuration</h2>
+            <p><strong>Grade:</strong> <span class="grade grade-d">D</span></p>
+            <div class="cert-info">
+                <h3>Certificate Information</h3>
+                <table>
+                    <tr>
+                        <th>Valid From</th>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <th>Valid Until</th>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <th>Expired</th>
+                        <td class="error">Yes</td>
+                    </tr>
+                    <tr>
+                        <th>Self-Signed</th>
+                        <td class="warning">Yes</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="protocol-info">
+                <h3>Supported Protocols</h3>
+                <table>
+                    <tr>
+                        <th>Protocol</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>SSLv2</td>
+                        <td class="success">Not Supported</td>
+                    </tr>
+                    <tr>
+                        <td>SSLv3</td>
+                        <td class="success">Not Supported</td>
+                    </tr>
+                    <tr>
+                        <td>TLSv1</td>
+                        <td class="success">Not Supported</td>
+                    </tr>
+                    <tr>
+                        <td>TLSv1.1</td>
+                        <td class="success">Not Supported</td>
+                    </tr>
+                    <tr>
+                        <td>TLSv1.2</td>
+                        <td class="success">Supported</td>
+                    </tr>
+                    <tr>
+                        <td>TLSv1.3</td>
+                        <td class="success">Supported</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="ssl-vulnerabilities">
+                <h3>Vulnerabilities</h3>
+                <ul class="error-list">
+                    <li>expired_certificate</li>
+                    <li>self_signed_certificate</li>
+                </ul>
+            </div>
+        </section>
+        <section class="sensitive-paths">
+            <h2>Sensitive Paths</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Path</th>
+                            <th>Sensitivity</th>
+                            <th>Status Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>login</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>dashboard</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>wp-content</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>backups</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>wp-admin</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>backup</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>administrator</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>phpmyadmin</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>data</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>db</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>setup</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>uploads</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>configuration</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>mysql</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>install</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>config</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>tmp</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>database</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>temp</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>api</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>admin.php</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>home</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>wp-login.php</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>account</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>users</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>login.php</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>accounts</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>log</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>logs</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>robots.txt</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>.git</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>.svn</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>.env</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>dev</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>test</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>development</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>server-status</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>staging</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>prod</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>production</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>phpinfo.php</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>info.php</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>.htaccess</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>.DS_Store</td>
+                            <td class="low">Low</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>wp-config.php</td>
+                            <td class="high">High</td>
+                            <td>301</td>
+                        </tr>
+                        <tr>
+                            <td>console</td>
+                            <td class="medium">Medium</td>
+                            <td>301</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="osint-findings">
+            <h2>OSINT and Breach Findings</h2>
+            <p><strong>Total Breaches:</strong> <span class="error">12</span></p>
+            <div class="emails-found">
+                <h3>Emails Found (50)</h3>
+                <div class="email-list">
+                    <span class="email-badge">admin@youtube.com</span>
+                    <span class="email-badge">contact@youtube.com</span>
+                    <span class="email-badge">david.y@youtube.com</span>
+                    <span class="email-badge">david.youtube@youtube.com</span>
+                    <span class="email-badge">david@youtube.com</span>
+                    <span class="email-badge">david_youtube@youtube.com</span>
+                    <span class="email-badge">davidyoutube@youtube.com</span>
+                    <span class="email-badge">help@youtube.com</span>
+                    <span class="email-badge">hostmaster@youtube.com</span>
+                    <span class="email-badge">info@youtube.com</span>
+                    <span class="email-badge">james.y@youtube.com</span>
+                    <span class="email-badge">james.youtube@youtube.com</span>
+                    <span class="email-badge">james@youtube.com</span>
+                    <span class="email-badge">james_youtube@youtube.com</span>
+                    <span class="email-badge">jamesyoutube@youtube.com</span>
+                    <span class="email-badge">jane.y@youtube.com</span>
+                    <span class="email-badge">jane.youtube@youtube.com</span>
+                    <span class="email-badge">jane@youtube.com</span>
+                    <span class="email-badge">jane_youtube@youtube.com</span>
+                    <span class="email-badge">janeyoutube@youtube.com</span>
+                    <span class="email-badge more">+30 more</span>
+                </div>
+            </div>
+            <div class="breach-details">
+                <h3>Breach Details</h3>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-09-09</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 2</h4>
+                    <p><strong>Date:</strong> 2019-10-12</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 3</h4>
+                    <p><strong>Date:</strong> 2019-11-15</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-05-05</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 2</h4>
+                    <p><strong>Date:</strong> 2019-06-08</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-01-01</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-01-01</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-05-05</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 2</h4>
+                    <p><strong>Date:</strong> 2019-06-08</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Email Breach 1</h4>
+                    <p><strong>Date:</strong> 2019-01-01</p>
+                    <p><strong>Source:</strong> Have I Been Pwned Email Check (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>Passwords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Pastebin Leak 1</h4>
+                    <p><strong>Date:</strong> 2021-06-06</p>
+                    <p><strong>Source:</strong> Pastebin (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>API Keys</li>
+                            <li>Source Code</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="breach-item">
+                    <h4>Pastebin Leak 2</h4>
+                    <p><strong>Date:</strong> 2021-07-10</p>
+                    <p><strong>Source:</strong> Pastebin (Simulated)</p>
+                    <div class="data-classes">
+                        <p><strong>Exposed Data:</strong></p>
+                        <ul>
+                            <li>Email addresses</li>
+                            <li>API Keys</li>
+                            <li>Source Code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Report generated by Attack Surface Monitoring Tool on 2025-04-21</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add collapsible functionality to sections
+            const sections = document.querySelectorAll("section > h2");
+            sections.forEach(section => {
+                section.addEventListener("click", function() {
+                    this.parentElement.classList.toggle("collapsed");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

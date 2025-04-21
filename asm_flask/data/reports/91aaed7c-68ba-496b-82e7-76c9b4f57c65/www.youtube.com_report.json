@@ -1,0 +1,512 @@
+{
+  "domain": "www.youtube.com",
+  "scan_date": "2025-04-21",
+  "risk_score": 96,
+  "risk_summary": "The domain www.youtube.com has critical security vulnerabilities that require immediate attention. The attack surface is significantly exposed with multiple high-severity issues that could lead to system compromise. Urgent remediation is necessary to prevent potential breaches.",
+  "subdomains": [],
+  "dns_records": {
+    "A": [
+      "142.250.183.110",
+      "142.250.192.14",
+      "142.250.192.46",
+      "142.250.192.78",
+      "142.250.192.110",
+      "142.250.192.142",
+      "142.251.42.14",
+      "142.251.42.46",
+      "142.251.42.78",
+      "172.217.174.238",
+      "216.58.203.46",
+      "142.250.67.174",
+      "142.250.67.206",
+      "142.250.76.206",
+      "142.250.183.46",
+      "142.250.183.78"
+    ],
+    "AAAA": [
+      "2404:6800:4009:82d::200e",
+      "2404:6800:4009:82e::200e",
+      "2404:6800:4009:802::200e",
+      "2404:6800:4009:826::200e"
+    ],
+    "MX": [],
+    "NS": [],
+    "TXT": [],
+    "SOA": [],
+    "CNAME": [
+      "youtube-ui.l.google.com."
+    ],
+    "SPF": [],
+    "DKIM": [],
+    "DMARC": []
+  },
+  "open_ports": [],
+  "tech_stack": [
+    "react"
+  ],
+  "headers": {
+    "target": "www.youtube.com",
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Content-Type-Options": "nosniff",
+      "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "Mon, 01 Jan 1990 00:00:00 GMT",
+      "Date": "Mon, 21 Apr 2025 05:49:16 GMT",
+      "X-Frame-Options": "SAMEORIGIN",
+      "Strict-Transport-Security": "max-age=31536000",
+      "Cross-Origin-Opener-Policy": "same-origin-allow-popups; report-to=\"youtube_main\"",
+      "Origin-Trial": "AmhMBR6zCLzDDxpW+HfpP67BqwIknWnyMOXOQGfzYswFmJe+fgaI6XZgAzcxOrzNtP7hEDsOo1jdjFnVr2IdxQ4AAAB4eyJvcmlnaW4iOiJodHRwczovL3lvdXR1YmUuY29tOjQ0MyIsImZlYXR1cmUiOiJXZWJWaWV3WFJlcXVlc3RlZFdpdGhEZXByZWNhdGlvbiIsImV4cGlyeSI6MTc1ODA2NzE5OSwiaXNTdWJkb21haW4iOnRydWV9",
+      "Permissions-Policy": "ch-ua-arch=*, ch-ua-bitness=*, ch-ua-full-version=*, ch-ua-full-version-list=*, ch-ua-model=*, ch-ua-wow64=*, ch-ua-form-factors=*, ch-ua-platform=*, ch-ua-platform-version=*",
+      "Report-To": "{\"group\":\"youtube_main\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/youtube_main\"}]}",
+      "Content-Security-Policy": "require-trusted-types-for 'script'",
+      "Accept-CH": "Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Model, Sec-CH-UA-WoW64, Sec-CH-UA-Form-Factors, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version",
+      "Vary": "Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Model, Sec-CH-UA-WoW64, Sec-CH-UA-Form-Factors, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version",
+      "P3P": "CP=\"This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=en-GB for more info.\"",
+      "Content-Encoding": "gzip",
+      "Server": "ESF",
+      "X-XSS-Protection": "0",
+      "Set-Cookie": "GPS=1; Domain=.youtube.com; Expires=Mon, 21-Apr-2025 06:19:16 GMT; Path=/; Secure; HttpOnly, YSC=VcaDSLjosjQ; Domain=.youtube.com; Path=/; Secure; HttpOnly; SameSite=none; Partitioned, VISITOR_INFO1_LIVE=1d8jkyusKHY; Domain=.youtube.com; Expires=Sat, 18-Oct-2025 05:49:16 GMT; Path=/; Secure; HttpOnly; SameSite=none; Partitioned, VISITOR_PRIVACY_METADATA=CgJJThIEGgAgGg%3D%3D; Domain=.youtube.com; Expires=Sat, 18-Oct-2025 05:49:16 GMT; Path=/; Secure; HttpOnly; SameSite=none; Partitioned, __Secure-ROLLOUT_TOKEN=COXMgKa6gqWj2AEQ0qnY7bbojAMY0qnY7bbojAM%3D; Domain=youtube.com; Expires=Sat, 18-Oct-2025 05:49:16 GMT; Path=/; Secure; HttpOnly; SameSite=none; Partitioned",
+      "Alt-Svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "Transfer-Encoding": "chunked"
+    },
+    "missing_headers": [
+      "referrer-policy",
+      "clear-site-data",
+      "cross-origin-embedder-policy",
+      "cross-origin-resource-policy",
+      "access-control-allow-origin",
+      "x-powered-by"
+    ],
+    "insecure_headers": [
+      "server: ESF"
+    ],
+    "score": 52,
+    "max_score": 72,
+    "grade": "B-"
+  },
+  "ssl_info": {
+    "target": "www.youtube.com",
+    "port": 443,
+    "has_ssl": true,
+    "certificate": {
+      "subject": {},
+      "issuer": {},
+      "version": null,
+      "serial_number": null,
+      "not_before": null,
+      "not_after": null,
+      "expired": true,
+      "self_signed": true,
+      "signature_algorithm": "TLS_AES_256_GCM_SHA384",
+      "public_key_algorithm": null,
+      "key_size": null,
+      "san": []
+    },
+    "protocols": {
+      "SSLv2": false,
+      "SSLv3": false,
+      "TLSv1": false,
+      "TLSv1.1": false,
+      "TLSv1.2": true,
+      "TLSv1.3": true
+    },
+    "cipher_suites": [
+      "TLS_AES_256_GCM_SHA384",
+      "ECDHE-RSA-AES128-GCM-SHA256"
+    ],
+    "vulnerabilities": [
+      "expired_certificate",
+      "self_signed_certificate"
+    ],
+    "grade": "D",
+    "issues": [
+      "Certificate has expired",
+      "Self-signed certificate detected"
+    ]
+  },
+  "osint_findings": {
+    "domain": "www.youtube.com",
+    "emails_found": [
+      "admin@www.youtube.com",
+      "contact@www.youtube.com",
+      "help@www.youtube.com",
+      "hostmaster@www.youtube.com",
+      "info@www.youtube.com",
+      "postmaster@www.youtube.com",
+      "sales@www.youtube.com",
+      "security@www.youtube.com",
+      "support@www.youtube.com",
+      "webmaster@www.youtube.com"
+    ],
+    "breaches": [
+      {
+        "breach_id": "breach_ab3201c6_0",
+        "title": "Simulated Breach 1",
+        "domain": "www.youtube.com",
+        "breach_date": "2020-07-07",
+        "added_date": "2020-07-07",
+        "modified_date": "2020-07-07",
+        "description": "This is a simulated breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords",
+          "Names"
+        ],
+        "source": "Have I Been Pwned (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "breach_ab3201c6_1",
+        "title": "Simulated Breach 2",
+        "domain": "www.youtube.com",
+        "breach_date": "2020-08-09",
+        "added_date": "2020-08-09",
+        "modified_date": "2020-08-09",
+        "description": "This is a simulated breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords",
+          "Names"
+        ],
+        "source": "Have I Been Pwned (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_6d54c1c8_0",
+        "title": "Email Breach 1",
+        "email": "contact@www.youtube.com",
+        "breach_date": "2019-01-13",
+        "added_date": "2019-01-13",
+        "modified_date": "2019-01-13",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      },
+      {
+        "breach_id": "email_breach_824d1bac_0",
+        "title": "Email Breach 1",
+        "email": "security@www.youtube.com",
+        "breach_date": "2019-01-01",
+        "added_date": "2019-01-01",
+        "modified_date": "2019-01-01",
+        "description": "This is a simulated email breach for demonstration purposes.",
+        "data_classes": [
+          "Email addresses",
+          "Passwords"
+        ],
+        "source": "Have I Been Pwned Email Check (Simulated)",
+        "verified": true
+      }
+    ],
+    "breach_count": 4,
+    "data_sources": [
+      "Domain breach check",
+      "Email breach check"
+    ]
+  },
+  "sensitive_paths": [
+    {
+      "path": "backup",
+      "url": "https://www.youtube.com/backup",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "backup - YouTube",
+      "content_length": 805251,
+      "sensitivity": "high"
+    },
+    {
+      "path": "phpmyadmin",
+      "url": "https://www.youtube.com/phpmyadmin",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "phpMyAdmin - YouTube",
+      "content_length": 637440,
+      "sensitivity": "high"
+    },
+    {
+      "path": "wp-content",
+      "url": "https://www.youtube.com/wp-content",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "WPContent - YouTube",
+      "content_length": 624024,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "database",
+      "url": "https://www.youtube.com/database",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Database - YouTube",
+      "content_length": 800718,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "db",
+      "url": "https://www.youtube.com/db",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Deep Blizzard&#39;s Art School - YouTube",
+      "content_length": 1162064,
+      "sensitivity": "high"
+    },
+    {
+      "path": "setup",
+      "url": "https://www.youtube.com/setup",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "setup - YouTube",
+      "content_length": 615093,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "mysql",
+      "url": "https://www.youtube.com/mysql",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "MySQL - YouTube",
+      "content_length": 1255184,
+      "sensitivity": "high"
+    },
+    {
+      "path": "temp",
+      "url": "https://www.youtube.com/temp",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "TeMp - YouTube",
+      "content_length": 602881,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "config",
+      "url": "https://www.youtube.com/config",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Con Fig - YouTube",
+      "content_length": 604954,
+      "sensitivity": "high"
+    },
+    {
+      "path": "uploads",
+      "url": "https://www.youtube.com/uploads",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Uploads - YouTube",
+      "content_length": 600670,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "users",
+      "url": "https://www.youtube.com/users",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "users - YouTube",
+      "content_length": 602799,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "api",
+      "url": "https://www.youtube.com/api",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "api - YouTube",
+      "content_length": 600493,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "robots.txt",
+      "url": "https://www.youtube.com/robots.txt",
+      "status_code": 200,
+      "content_type": "text/plain",
+      "title": "Unknown",
+      "content_length": 741,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "log",
+      "url": "https://www.youtube.com/log",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "LOG - YouTube",
+      "content_length": 607311,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "test",
+      "url": "https://www.youtube.com/test",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "motorvisiontest - YouTube",
+      "content_length": 692956,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "development",
+      "url": "https://www.youtube.com/development",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "development - YouTube",
+      "content_length": 696766,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "production",
+      "url": "https://www.youtube.com/production",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "production - YouTube",
+      "content_length": 618897,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "prod",
+      "url": "https://www.youtube.com/prod",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "raikimi - YouTube",
+      "content_length": 639667,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "console",
+      "url": "https://www.youtube.com/console",
+      "status_code": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "console - YouTube",
+      "content_length": 693832,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "dashboard",
+      "url": "https://www.youtube.com/dashboard",
+      "status_code": 301,
+      "content_type": "application/binary",
+      "title": "Unknown",
+      "content_length": 0,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "dev",
+      "url": "https://www.youtube.com/dev",
+      "status_code": 301,
+      "content_type": "application/binary",
+      "title": "Unknown",
+      "content_length": 0,
+      "sensitivity": "low"
+    },
+    {
+      "path": "user",
+      "url": "https://www.youtube.com/user",
+      "status_code": 303,
+      "content_type": "application/binary",
+      "title": "Unknown",
+      "content_length": 0,
+      "sensitivity": "medium"
+    },
+    {
+      "path": "account",
+      "url": "https://www.youtube.com/account",
+      "status_code": 303,
+      "content_type": "application/binary",
+      "title": "Unknown",
+      "content_length": 0,
+      "sensitivity": "medium"
+    }
+  ],
+  "risk_details": [
+    {
+      "category": "Sensitive Paths",
+      "title": "Multiple sensitive paths exposed",
+      "description": "Found 23 sensitive paths or directories",
+      "severity": "Critical",
+      "affected_assets": [
+        "backup",
+        "phpmyadmin",
+        "wp-content",
+        "database",
+        "db",
+        "setup",
+        "mysql",
+        "temp",
+        "config",
+        "uploads"
+      ]
+    },
+    {
+      "category": "OSINT",
+      "title": "Data breaches detected",
+      "description": "Found 4 data breaches involving the domain or associated emails",
+      "severity": "Critical",
+      "affected_assets": [
+        "Simulated Breach 1",
+        "Simulated Breach 2",
+        "Email Breach 1",
+        "Email Breach 1"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Expired SSL certificate",
+      "description": "SSL certificate has expired",
+      "severity": "Critical",
+      "affected_assets": [
+        "www.youtube.com"
+      ]
+    },
+    {
+      "category": "Sensitive Paths",
+      "title": "Highly sensitive paths exposed",
+      "description": "Paths with high sensitivity are accessible",
+      "severity": "Critical",
+      "affected_assets": [
+        "backup",
+        "phpmyadmin",
+        "db",
+        "mysql",
+        "config"
+      ]
+    },
+    {
+      "category": "OSINT",
+      "title": "Credential leaks detected",
+      "description": "Credentials have been exposed in data breaches",
+      "severity": "Critical",
+      "affected_assets": [
+        "Simulated Breach 1",
+        "Simulated Breach 2",
+        "Email Breach 1",
+        "Email Breach 1"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Self-signed SSL certificate",
+      "description": "Self-signed certificates are not trusted by browsers",
+      "severity": "High",
+      "affected_assets": [
+        "www.youtube.com"
+      ]
+    },
+    {
+      "category": "SSL/TLS",
+      "title": "Poor SSL/TLS configuration",
+      "description": "SSL/TLS configuration received a grade of D",
+      "severity": "Medium",
+      "affected_assets": [
+        "www.youtube.com"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Immediately restrict access to administrative interfaces using IP filtering or VPN requirements",
+    "Update or patch all services with known vulnerabilities, or place them behind a properly configured firewall",
+    "Replace expired SSL certificates with valid ones from trusted certificate authorities",
+    "Implement all missing security headers, particularly HSTS, CSP, and X-Frame-Options",
+    "Force password resets for all accounts and implement multi-factor authentication"
+  ]
+}

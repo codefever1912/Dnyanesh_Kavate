@@ -1,0 +1,41 @@
+// Cyber pattern SVG for hero background
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="800" viewBox="0 0 1440 800">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <g filter="url(#glow)">
+    <!-- Connection lines -->
+    <path d="M 200 150 L 400 250 L 600 200 L 800 300 L 1000 200 L 1200 250" stroke="rgba(56, 178, 172, 0.3)" stroke-width="1.5" fill="none"/>
+    <path d="M 150 300 L 350 400 L 550 350 L 750 450 L 950 350 L 1150 400" stroke="rgba(56, 178, 172, 0.2)" stroke-width="1" fill="none"/>
+    <path d="M 250 450 L 450 550 L 650 500 L 850 600 L 1050 500 L 1250 550" stroke="rgba(56, 178, 172, 0.25)" stroke-width="1.2" fill="none"/>
+    
+    <!-- Nodes -->
+    <circle cx="200" cy="150" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    <circle cx="400" cy="250" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="600" cy="200" r="5" fill="rgba(56, 178, 172, 0.9)"/>
+    <circle cx="800" cy="300" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    <circle cx="1000" cy="200" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="1200" cy="250" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    
+    <circle cx="150" cy="300" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="350" cy="400" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    <circle cx="550" cy="350" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="750" cy="450" r="5" fill="rgba(56, 178, 172, 0.9)"/>
+    <circle cx="950" cy="350" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="1150" cy="400" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    
+    <circle cx="250" cy="450" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    <circle cx="450" cy="550" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="650" cy="500" r="4" fill="rgba(56, 178, 172, 0.8)"/>
+    <circle cx="850" cy="600" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+    <circle cx="1050" cy="500" r="5" fill="rgba(56, 178, 172, 0.9)"/>
+    <circle cx="1250" cy="550" r="3" fill="rgba(56, 178, 172, 0.7)"/>
+  </g>
+</svg>

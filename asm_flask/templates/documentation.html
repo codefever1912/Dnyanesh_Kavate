@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Attack Surface Monitoring Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>ASM Tool</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="{{ 'active' if request.path == url_for('home') else '' }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == url_for('dashboard') else '' }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('documentation') }}" class="{{ 'active' if request.path == url_for('documentation') else '' }}">Documentation</a></li>
+                    <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.path == url_for('about') else '' }}">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif category == 'error' %}
+                        <i class="fas fa-exclamation-circle"></i>
+                    {% elif category == 'info' %}
+                        <i class="fas fa-info-circle"></i>
+                    {% elif category == 'warning' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% endif %}
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="documentation-section">
+        <div class="container">
+            <div class="documentation-container">
+                <div class="documentation-sidebar">
+                    <ul>
+                        <li><a href="#introduction" class="active">Introduction</a></li>
+                        <li><a href="#getting-started">Getting Started</a></li>
+                        <li><a href="#reconnaissance-modules">Reconnaissance Modules</a></li>
+                        <li><a href="#risk-analysis">Risk Analysis</a></li>
+                        <li><a href="#output-formats">Output Formats</a></li>
+                        <li><a href="#api-reference">API Reference</a></li>
+                        <li><a href="#cli-usage">CLI Usage</a></li>
+                        <li><a href="#troubleshooting">Troubleshooting</a></li>
+                    </ul>
+                </div>
+                
+                <div class="documentation-content">
+                    <section id="introduction">
+                        <h2>Introduction</h2>
+                        <p>The Attack Surface Monitoring (ASM) Tool is a comprehensive solution designed to help security professionals, developers, and organizations monitor and analyze their attack surface. By providing detailed reconnaissance, risk scoring, and AI-powered analysis, the ASM Tool helps identify security vulnerabilities and potential threats before they can be exploited.</p>
+                        
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Comprehensive Reconnaissance</strong>: Subdomain enumeration, port scanning, service fingerprinting, and more</li>
+                            <li><strong>AI-Powered Analysis</strong>: Intelligent risk assessment and actionable recommendations</li>
+                            <li><strong>Security Auditing</strong>: SSL/TLS analysis, HTTP header security, and sensitive path discovery</li>
+                            <li><strong>Detailed Reports</strong>: Interactive HTML, Markdown, and JSON reports with visual indicators</li>
+                            <li><strong>Multiple Interfaces</strong>: Web interface, API, and command-line tool</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="getting-started">
+                        <h2>Getting Started</h2>
+                        <p>Using the ASM Tool is simple. You can scan a single domain or upload a CSV file with multiple domains.</p>
+                        
+                        <h3>Single Domain Scan</h3>
+                        <ol>
+                            <li>Navigate to the home page</li>
+                            <li>Enter a domain name in the "Single Domain Scan" form</li>
+                            <li>Select the reconnaissance modules you want to run</li>
+                            <li>Choose your preferred output format</li>
+                            <li>Click "Scan Domain" to start the scan</li>
+                        </ol>
+                        
+                        <h3>Bulk Domain Scan</h3>
+                        <ol>
+                            <li>Prepare a CSV file with a column named "domain" containing the domains you want to scan</li>
+                            <li>Navigate to the home page</li>
+                            <li>Upload your CSV file in the "Bulk Domain Scan" form</li>
+                            <li>Select the reconnaissance modules you want to run</li>
+                            <li>Choose your preferred output format</li>
+                            <li>Click "Upload & Scan" to start the scan</li>
+                        </ol>
+                        
+                        <h3>Viewing Results</h3>
+                        <p>After starting a scan, you'll be redirected to the status page where you can monitor the progress. Once the scan is completed, you can view the results in your chosen format and download the reports.</p>
+                    </section>
+                    
+                    <section id="reconnaissance-modules">
+                        <h2>Reconnaissance Modules</h2>
+                        <p>The ASM Tool includes 10 reconnaissance modules that provide comprehensive coverage of your attack surface.</p>
+                        
+                        <h3>Subdomain Enumeration</h3>
+                        <p>Discovers subdomains associated with the target domain using various techniques including DNS queries, certificate transparency logs, and public records.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "subdomains": [
+    "mail.example.com",
+    "www.example.com",
+    "api.example.com",
+    "blog.example.com"
+  ]
+}</pre>
+                        
+                        <h3>Live Subdomain Detection</h3>
+                        <p>Verifies which discovered subdomains are currently active and reachable.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "live_subdomains": [
+    "www.example.com",
+    "api.example.com"
+  ]
+}</pre>
+                        
+                        <h3>WHOIS & DNS Analysis</h3>
+                        <p>Retrieves WHOIS information and DNS records for the target domain.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "whois": {
+    "registrar": "Example Registrar, Inc.",
+    "creation_date": "2000-01-01T00:00:00Z",
+    "expiration_date": "2025-01-01T00:00:00Z"
+  },
+  "dns_records": {
+    "A": ["93.184.216.34"],
+    "MX": ["mail.example.com"],
+    "NS": ["ns1.example.com", "ns2.example.com"],
+    "TXT": ["v=spf1 include:_spf.example.com ~all"]
+  }
+}</pre>
+                        
+                        <h3>Port Scanning</h3>
+                        <p>Scans for open ports on the target domain to identify potential entry points.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "open_ports": [
+    {"port": 80, "service": "http"},
+    {"port": 443, "service": "https"},
+    {"port": 22, "service": "ssh"}
+  ]
+}</pre>
+                        
+                        <h3>Service Fingerprinting</h3>
+                        <p>Identifies services running on open ports and their versions.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "services": [
+    {
+      "port": 80,
+      "service": "http",
+      "product": "nginx",
+      "version": "1.18.0"
+    },
+    {
+      "port": 443,
+      "service": "https",
+      "product": "nginx",
+      "version": "1.18.0"
+    }
+  ]
+}</pre>
+                        
+                        <h3>Technology Stack Detection</h3>
+                        <p>Identifies technologies used by the target website, including frameworks, CMS, and libraries.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "technologies": [
+    {"name": "Nginx", "version": "1.18.0", "category": "Web Server"},
+    {"name": "jQuery", "version": "3.5.1", "category": "JavaScript Library"},
+    {"name": "Bootstrap", "version": "4.5.2", "category": "UI Framework"}
+  ]
+}</pre>
+                        
+                        <h3>SSL/TLS Analysis</h3>
+                        <p>Analyzes SSL/TLS configuration for security issues and vulnerabilities.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "ssl_info": {
+    "certificate": {
+      "issuer": "Let's Encrypt Authority X3",
+      "subject": "example.com",
+      "valid_from": "2023-01-01T00:00:00Z",
+      "valid_to": "2024-01-01T00:00:00Z"
+    },
+    "protocols": ["TLSv1.2", "TLSv1.3"],
+    "cipher_suites": ["TLS_AES_256_GCM_SHA384", "TLS_CHACHA20_POLY1305_SHA256"],
+    "vulnerabilities": []
+  }
+}</pre>
+                        
+                        <h3>HTTP Header Security Audit</h3>
+                        <p>Checks HTTP security headers and identifies missing or misconfigured headers.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "headers": {
+    "present": [
+      {"name": "Content-Security-Policy", "value": "default-src 'self'"},
+      {"name": "X-XSS-Protection", "value": "1; mode=block"}
+    ],
+    "missing": [
+      {"name": "X-Frame-Options", "recommendation": "Add X-Frame-Options: DENY"},
+      {"name": "X-Content-Type-Options", "recommendation": "Add X-Content-Type-Options: nosniff"}
+    ]
+  }
+}</pre>
+                        
+                        <h3>Sensitive Path Discovery</h3>
+                        <p>Checks for sensitive files and directories that might expose information or provide unauthorized access.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "sensitive_paths": [
+    {"path": "/admin", "status": 302, "risk": "high"},
+    {"path": "/backup", "status": 403, "risk": "medium"},
+    {"path": "/phpinfo.php", "status": 200, "risk": "critical"}
+  ]
+}</pre>
+                        
+                        <h3>OSINT & Breach Check</h3>
+                        <p>Searches for information about the target domain in public data breaches and OSINT sources.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "osint_findings": {
+    "breaches": [
+      {"name": "Example Breach", "date": "2020-01-01", "records": 1000},
+      {"name": "Another Breach", "date": "2019-05-15", "records": 500}
+    ],
+    "paste_sites": [
+      {"source": "Pastebin", "url": "https://pastebin.com/example", "date": "2021-03-10"}
+    ]
+  }
+}</pre>
+                    </section>
+                    
+                    <section id="risk-analysis">
+                        <h2>Risk Analysis</h2>
+                        <p>The ASM Tool calculates a risk score based on the findings from the reconnaissance modules. The risk score is a value between 0 and 100, with higher values indicating a higher risk level.</p>
+                        
+                        <h3>Risk Scoring</h3>
+                        <p>The risk score is calculated using a weighted algorithm that considers various factors:</p>
+                        <ul>
+                            <li>Number and severity of open ports</li>
+                            <li>SSL/TLS configuration issues</li>
+                            <li>Missing or misconfigured HTTP security headers</li>
+                            <li>Discovered sensitive paths</li>
+                            <li>Outdated software versions</li>
+                            <li>Previous data breaches</li>
+                        </ul>
+                        
+                        <h3>Risk Levels</h3>
+                        <ul>
+                            <li><span class="critical">Critical (85-100)</span>: Immediate action required</li>
+                            <li><span class="high">High (70-84)</span>: Urgent attention needed</li>
+                            <li><span class="medium">Medium (50-69)</span>: Should be addressed soon</li>
+                            <li><span class="low">Low (25-49)</span>: Lower priority issues</li>
+                            <li><span class="info">Info (0-24)</span>: Informational findings</li>
+                        </ul>
+                        
+                        <h3>AI Analysis</h3>
+                        <p>The ASM Tool uses AI to analyze the reconnaissance findings and provide actionable recommendations. The AI analysis considers the context of the findings and provides prioritized recommendations based on the risk level and potential impact.</p>
+                        <p><strong>Example output:</strong></p>
+                        <pre>
+{
+  "ai_analysis": {
+    "summary": "The domain example.com has several security issues that should be addressed, including missing HTTP security headers and sensitive paths accessible without authentication.",
+    "recommendations": [
+      {
+        "priority": "high",
+        "issue": "Missing HTTP security headers",
+        "recommendation": "Implement X-Frame-Options, X-Content-Type-Options, and Strict-Transport-Security headers to improve web security."
+      },
+      {
+        "priority": "critical",
+        "issue": "Sensitive path /phpinfo.php accessible",
+        "recommendation": "Remove or restrict access to phpinfo.php as it exposes detailed server configuration information."
+      }
+    ]
+  }
+}</pre>
+                    </section>
+                    
+                    <section id="output-formats">
+                        <h2>Output Formats</h2>
+                        <p>The ASM Tool provides three output formats for scan results:</p>
+                        
+                        <h3>JSON</h3>
+                        <p>The JSON format provides the raw data in a structured format that can be easily parsed by other tools or scripts.</p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+{
+  "domain": "example.com",
+  "scan_date": "2023-05-15T10:30:00Z",
+  "subdomains": [...],
+  "live_subdomains": [...],
+  "whois": {...},
+  "dns_records": {...},
+  "open_ports": [...],
+  "services": [...],
+  "technologies": [...],
+  "ssl_info": {...},
+  "headers": {...},
+  "sensitive_paths": [...],
+  "osint_findings": {...},
+  "risk_score": 65,
+  "risk_level": "Medium",
+  "ai_analysis": {...}
+}</pre>
+                        
+                        <h3>Markdown</h3>
+                        <p>The Markdown format provides a human-readable report that can be viewed in any text editor or converted to other formats.</p>
+                        <p><strong>Example:</strong></p>
+                        <pre>
+# Attack Surface Monitoring Report for example.com
+
+**Scan Date:** 2023-05-15 10:30:00 UTC
+**Risk Score:** 65/100 (Medium)
+
+## Summary
+The domain example.com has several security issues that should be addressed, including missing HTTP security headers and sensitive paths accessible without authentication.
+
+## Subdomains
+- www.example.com (Live)
+- api.example.com (Live)
+- mail.example.com (Not responding)
+- blog.example.com (Not responding)
+
+## Open Ports
+- 80/tcp (http): nginx 1.18.0
+- 443/tcp (https): nginx 1.18.0
+- 22/tcp (ssh): OpenSSH 8.2p1
+
+...</pre>
+                        
+                        <h3>HTML</h3>
+                        <p>The HTML format provides an interactive report with visual indicators and collapsible sections for easy navigation.</p>
+                        <p>The HTML report includes:</p>
+                        <ul>
+                            <li>Executive summary with risk score and key findings</li>
+                            <li>Detailed findings from each reconnaissance module</li>
+                            <li>Visual indicators for risk levels</li>
+                            <li>Collapsible sections for better organization</li>
+                            <li>AI-generated recommendations</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="api-reference">
+                        <h2>API Reference</h2>
+                        <p>The ASM Tool provides a RESTful API for programmatic access to its functionality.</p>
+                        
+                        <h3>Authentication</h3>
+                        <p>Currently, the API does not require authentication. This may change in future versions.</p>
+                        
+                        <h3>Endpoints</h3>
+                        
+                        <h4>Scan a Domain</h4>
+                        <pre>
+POST /scan/domain
+Content-Type: application/json
+
+{
+  "domain": "example.com",
+  "modules": ["all"],
+  "format": "html"
+}
+
+Response:
+{
+  "scan_id": "550e8400-e29b-41d4-a716-446655440000",
+  "message": "Scan started for domain: example.com"
+}</pre>
+                        
+                        <h4>Scan Domains from CSV</h4>
+                        <pre>
+POST /scan/csv
+Content-Type: multipart/form-data
+
+Form fields:
+- csv_file: CSV file with a 'domain' column
+- modules: Comma-separated list of modules or "all"
+- format: Output format (json, md, html)
+
+Response:
+{
+  "scan_id": "550e8400-e29b-41d4-a716-446655440000",
+  "message": "Scan started for 5 domains"
+}</pre>
+                        
+                        <h4>Get Scan Status</h4>
+                        <pre>
+GET /api/status/{scan_id}
+
+Response:
+{
+  "scan_id": "550e8400-e29b-41d4-a716-446655440000",
+  "domain": "example.com",
+  "status": "in_progress",
+  "progress": 45,
+  "start_time": "2023-05-15T10:30:00Z",
+  "current_module": "port_scanning"
+}</pre>
+                        
+                        <h4>Get Report</h4>
+                        <pre>
+GET /reports/{scan_id}/{format}
+
+Formats:
+- json: Returns JSON report
+- md: Returns Markdown report
+- html: Returns HTML report</pre>
+                        
+                        <h4>Download All Reports</h4>
+                        <pre>
+GET /download/{scan_id}
+
+Returns a ZIP file containing all report formats</pre>
+                        
+                        <h4>Delete Scan</h4>
+                        <pre>
+DELETE /api/delete-scan/{scan_id}
+
+Response:
+{
+  "success": true,
+  "message": "Scan deleted"
+}</pre>
+                    </section>
+                    
+                    <section id="cli-usage">
+                        <h2>CLI Usage</h2>
+                        <p>The ASM Tool can also be used from the command line.</p>
+                        
+                        <h3>Basic Usage</h3>
+                        <pre>
+python cli.py scan --domain example.com --output-dir ./reports</pre>
+                        
+                        <h3>Options</h3>
+                        <pre>
+python cli.py scan [OPTIONS]
+
+Options:
+  --domain TEXT                 Domain to scan
+  --csv-file PATH               CSV file with domains
+  --modules TEXT                Comma-separated list of modules or "all"
+  --output-format [json|md|html]
+                                Output format
+  --output-dir PATH             Directory to save reports
+  --help                        Show this message and exit</pre>
+                        
+                        <h3>Examples</h3>
+                        <pre>
+# Scan a single domain with all modules
+python cli.py scan --domain example.com --output-dir ./reports
+
+# Scan a single domain with specific modules
+python cli.py scan --domain example.com --modules subdomain,port,ssl --output-dir ./reports
+
+# Scan multiple domains from a CSV file
+python cli.py scan --csv-file domains.csv --output-dir ./reports
+
+# Specify output format
+python cli.py scan --domain example.com --output-format json --output-dir ./reports</pre>
+                    </section>
+                    
+                    <section id="troubleshooting">
+                        <h2>Troubleshooting</h2>
+                        
+                        <h3>Common Issues</h3>
+                        
+                        <h4>Scan Fails to Start</h4>
+                        <p>If a scan fails to start, check the following:</p>
+                        <ul>
+                            <li>Ensure the domain is valid and properly formatted</li>
+                            <li>Check that the CSV file has the correct format with a "domain" column</li>
+                            <li>Verify that the selected modules are valid</li>
+                        </ul>
+                        
+                        <h4>Scan Gets Stuck</h4>
+                        <p>If a scan appears to be stuck, it might be due to:</p>
+                        <ul>
+                            <li>Network connectivity issues</li>
+                            <li>Rate limiting by target servers</li>
+                            <li>Firewall or proxy blocking the requests</li>
+                        </ul>
+                        <p>Try restarting the scan or reducing the number of modules.</p>
+                        
+                        <h4>Missing Results</h4>
+                        <p>If some results are missing from the report, it could be because:</p>
+                        <ul>
+                            <li>The target domain has security measures that block reconnaissance attempts</li>
+                            <li>The module encountered an error during execution</li>
+                            <li>There genuinely aren't any findings for that module</li>
+                        </ul>
+                        
+                        <h3>Getting Help</h3>
+                        <p>If you encounter issues not covered here, please contact us at support@asmtool.com or visit our GitHub repository to open an issue.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>ASM Tool</h2>
+                    <p>Comprehensive Attack Surface Monitoring</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@asmtool.com</p>
+                    <p><i class="fas fa-globe"></i> www.asmtool.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Attack Surface Monitoring Tool. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Flash message auto-dismiss
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                }, 5000);
+            });
+            
+            // Smooth scrolling for documentation links
+            const docLinks = document.querySelectorAll('.documentation-sidebar a');
+            docLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    docLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get the target section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        // Scroll to the target section
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Highlight active section on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.documentation-content section');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                if (currentSection) {
+                    docLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + currentSection) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

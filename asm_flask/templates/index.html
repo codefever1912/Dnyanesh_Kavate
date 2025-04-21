@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Surface Monitoring Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>ASM Tool</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="{{ 'active' if request.path == url_for('home') else '' }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == url_for('dashboard') else '' }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('documentation') }}" class="{{ 'active' if request.path == url_for('documentation') else '' }}">Documentation</a></li>
+                    <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.path == url_for('about') else '' }}">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif category == 'error' %}
+                        <i class="fas fa-exclamation-circle"></i>
+                    {% elif category == 'info' %}
+                        <i class="fas fa-info-circle"></i>
+                    {% elif category == 'warning' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% endif %}
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Attack Surface Monitoring Tool</h1>
+                <p>Comprehensive domain security analysis with AI-powered risk assessment</p>
+                <a href="#scan-section" class="btn btn-primary">Start Scanning</a>
+                <a href="{{ url_for('documentation') }}" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>Discover the powerful capabilities of our Attack Surface Monitoring Tool</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Comprehensive Reconnaissance</h3>
+                    <p>Subdomain enumeration, port scanning, service fingerprinting, and more</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Intelligent risk assessment and actionable recommendations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Security Auditing</h3>
+                    <p>SSL/TLS analysis, HTTP header security, and sensitive path discovery</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Detailed Reports</h3>
+                    <p>Interactive HTML, Markdown, and JSON reports with visual indicators</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="scan-section" class="scan-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Start Scanning</h2>
+                <p>Begin your security assessment by scanning a domain or uploading a CSV file</p>
+            </div>
+            <div class="scan-options">
+                <div class="scan-card">
+                    <h3>Single Domain Scan</h3>
+                    <form id="domain-form" action="{{ url_for('scan_domain') }}" method="post">
+                        {{ domain_form.hidden_tag() }}
+                        <div class="form-group">
+                            {{ domain_form.domain.label }}
+                            {{ domain_form.domain(placeholder="example.com") }}
+                            {% if domain_form.domain.errors %}
+                                {% for error in domain_form.domain.errors %}
+                                    <small class="error">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ domain_form.modules.label }}
+                            {{ domain_form.modules() }}
+                            <small>Hold Ctrl/Cmd to select multiple modules</small>
+                        </div>
+                        <div class="form-group">
+                            {{ domain_form.format.label }}
+                            {{ domain_form.format() }}
+                        </div>
+                        <div class="form-group">
+                            {{ domain_form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+
+                <div class="scan-card">
+                    <h3>Bulk Domain Scan</h3>
+                    <form id="csv-form" action="{{ url_for('scan_csv') }}" method="post" enctype="multipart/form-data">
+                        {{ csv_form.hidden_tag() }}
+                        <div class="form-group">
+                            {{ csv_form.csv_file.label }}
+                            {{ csv_form.csv_file() }}
+                            {% if csv_form.csv_file.errors %}
+                                {% for error in csv_form.csv_file.errors %}
+                                    <small class="error">{{ error }}</small>
+                                {% endfor %}
+                            {% endif %}
+                            <small>CSV file with a 'domain' column</small>
+                        </div>
+                        <div class="form-group">
+                            {{ csv_form.modules.label }}
+                            {{ csv_form.modules() }}
+                            <small>Hold Ctrl/Cmd to select multiple modules</small>
+                        </div>
+                        <div class="form-group">
+                            {{ csv_form.format.label }}
+                            {{ csv_form.format() }}
+                        </div>
+                        <div class="form-group">
+                            {{ csv_form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recent-scans">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recent Scans</h2>
+                <p>View the latest security assessments performed by our tool</p>
+            </div>
+            <div id="recent-scans-list">
+                {% if scans %}
+                    <table class="scans-table">
+                        <thead>
+                            <tr>
+                                <th>Domain</th>
+                                <th>Date</th>
+                                <th>Risk Score</th>
+                                <th>Report</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for scan in scans %}
+                            <tr>
+                                <td>{{ scan.domain }}</td>
+                                <td>{{ scan.date }}</td>
+                                <td class="{{ scan.risk_class }}">{{ scan.risk_score }}/100</td>
+                                <td><a href="{{ scan.report_url }}" class="btn btn-sm">View Report</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="no-scans">
+                        <i class="fas fa-search"></i>
+                        <h3>No scans yet</h3>
+                        <p>Start by scanning a domain or uploading a CSV file.</p>
+                        <a href="#scan-section" class="btn btn-primary">Start Scanning</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Our streamlined process makes security assessment simple and effective</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number"></div>
+                    <h3>Input Domain</h3>
+                    <p>Enter a single domain or upload a CSV file with multiple domains</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <h3>Reconnaissance</h3>
+                    <p>The tool performs comprehensive reconnaissance on the target domains</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <h3>Risk Analysis</h3>
+                    <p>AI-powered analysis calculates risk scores and provides recommendations</p>
+                </div>
+                <div class="step">
+                    <div class="step-number"></div>
+                    <h3>Review Results</h3>
+                    <p>Examine detailed reports and implement security improvements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>ASM Tool</h2>
+                    <p>Comprehensive Attack Surface Monitoring</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@asmtool.com</p>
+                    <p><i class="fas fa-globe"></i> www.asmtool.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Attack Surface Monitoring Tool. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Flash message auto-dismiss
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

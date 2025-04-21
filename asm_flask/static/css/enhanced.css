@@ -1,0 +1,442 @@
+/* Additional styles for enhanced visual design */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* Enhanced card hover effects */
+.feature-card, .scan-card, .step {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover, .scan-card:hover, .step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--secondary-color);
+}
+
+/* Animated gradient button */
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent-color), #f6ad55);
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle hover animations for navigation */
+nav ul li a {
+  position: relative;
+  overflow: hidden;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Enhanced form inputs */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--secondary-color);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.2);
+  outline: none;
+}
+
+/* Subtle background patterns */
+.features, .how-it-works {
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(56, 178, 172, 0.03) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, rgba(56, 178, 172, 0.03) 2%, transparent 0%);
+  background-size: 100px 100px;
+}
+
+/* Enhanced table styling */
+.scans-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: var(--shadow-md);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.scans-table th {
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  color: white;
+  padding: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.scans-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.scans-table tr:hover {
+  background-color: rgba(56, 178, 172, 0.05);
+}
+
+/* Animated progress bar */
+.progress {
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+  background-size: 200% auto;
+  animation: gradient-shift 2s ease infinite;
+}
+
+/* Pulsing effect for status badges */
+.status-badge.in-progress {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
+  }
+}
+
+/* Enhanced documentation sidebar */
+.documentation-sidebar {
+  transition: all 0.3s ease;
+}
+
+.documentation-sidebar a {
+  transition: all 0.3s ease;
+}
+
+.documentation-sidebar a:hover {
+  background-color: rgba(56, 178, 172, 0.1);
+  padding-left: 20px;
+}
+
+.documentation-sidebar a.active {
+  background-color: rgba(56, 178, 172, 0.15);
+  border-left-color: var(--secondary-color);
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+/* Code block styling */
+.documentation-content pre {
+  background-color: #1a202c;
+  color: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 25px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-left: 4px solid var(--secondary-color);
+  box-shadow: var(--shadow-md);
+}
+
+.documentation-content code {
+  background-color: #f1f5f9;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: #e53e3e;
+  transition: background-color 0.3s ease;
+}
+
+.documentation-content code:hover {
+  background-color: #e6f7ff;
+}
+
+/* Enhanced footer */
+footer {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/static/img/cyber-pattern.svg');
+  background-size: cover;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating labels for form inputs */
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: white;
+  padding: 0 5px;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Enhanced buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 0;
+}
+
+/* Subtle animations for icons */
+.feature-card i,
+.step-number,
+.footer-logo i {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.feature-card:hover i,
+.step:hover .step-number,
+.footer-logo:hover i {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--accent-color);
+}
+
+/* Enhanced hero section */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--bg-color));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtle animations for section headers */
+.section-header h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.section-header:hover h2::after {
+  width: 120px;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .feature-card, .scan-card, .step {
+    transform: none !important;
+  }
+  
+  .documentation-sidebar {
+    position: static;
+    height: auto;
+    overflow-y: visible;
+  }
+  
+  .documentation-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .documentation-content {
+    padding: 20px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-links h3::after,
+  .footer-contact h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a202c;
+    --card-bg: #2d3748;
+    --text-color: #e2e8f0;
+    --text-muted: #a0aec0;
+    --border-color: #4a5568;
+  }
+  
+  .form-group label {
+    background-color: var(--card-bg);
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+  }
+  
+  .documentation-content code {
+    background-color: #2d3748;
+    color: #f56565;
+  }
+  
+  .scans-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Print styles for reports */
+@media print {
+  header, footer, .buttons, .flash-messages {
+    display: none;
+  }
+  
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .documentation-content,
+  .status-container,
+  .about-content {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+  
+  .documentation-sidebar {
+    display: none;
+  }
+  
+  .documentation-container {
+    grid-template-columns: 1fr;
+  }
+}

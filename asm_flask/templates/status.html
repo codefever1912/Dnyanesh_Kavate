@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Status - Attack Surface Monitoring Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>ASM Tool</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="{{ 'active' if request.path == url_for('home') else '' }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == url_for('dashboard') else '' }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('documentation') }}" class="{{ 'active' if request.path == url_for('documentation') else '' }}">Documentation</a></li>
+                    <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.path == url_for('about') else '' }}">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif category == 'error' %}
+                        <i class="fas fa-exclamation-circle"></i>
+                    {% elif category == 'info' %}
+                        <i class="fas fa-info-circle"></i>
+                    {% elif category == 'warning' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% endif %}
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="status-section">
+        <div class="container">
+            <div class="status-container">
+                <h2>Scan Status</h2>
+                
+                <div class="status-info">
+                    <p><strong>Domain:</strong> <span id="domain-name">{{ domain }}</span></p>
+                    <p><strong>Scan ID:</strong> <span id="scan-id">{{ scan_id }}</span></p>
+                    <p><strong>Status:</strong> <span id="scan-status" class="status-badge {{ status }}">
+                        {% if status == 'completed' %}
+                            Completed
+                        {% elif status == 'in_progress' %}
+                            In Progress
+                        {% elif status == 'failed' %}
+                            Failed
+                        {% else %}
+                            Queued
+                        {% endif %}
+                    </span></p>
+                </div>
+                
+                <div class="progress-container">
+                    <h3>Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar" style="width: {{ progress }}%;"></div>
+                    </div>
+                    <p id="progress-text">{{ progress }}% complete</p>
+                    <p id="current-module"></p>
+                </div>
+                
+                {% if status == 'completed' %}
+                <div class="result-links">
+                    <h4>Scan Results</h4>
+                    <ul>
+                        <li><i class="fas fa-file-alt"></i> <a href="{{ url_for('get_report', scan_id=scan_id, format='html') }}">View HTML Report</a></li>
+                        <li><i class="fas fa-file-code"></i> <a href="{{ url_for('get_report', scan_id=scan_id, format='json') }}">Download JSON Report</a></li>
+                        <li><i class="fas fa-file-markdown"></i> <a href="{{ url_for('get_report', scan_id=scan_id, format='md') }}">Download Markdown Report</a></li>
+                        <li><i class="fas fa-file-archive"></i> <a href="{{ url_for('download_reports', scan_id=scan_id) }}">Download All Reports (ZIP)</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+                
+                <div class="buttons">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+                    <a href="{{ url_for('home') }}" class="btn btn-primary">New Scan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>ASM Tool</h2>
+                    <p>Comprehensive Attack Surface Monitoring</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@asmtool.com</p>
+                    <p><i class="fas fa-globe"></i> www.asmtool.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Attack Surface Monitoring Tool. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Flash message auto-dismiss
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                }, 5000);
+            });
+            
+            // Auto-refresh status for in-progress scans
+            const scanStatus = document.getElementById('scan-status');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const currentModule = document.getElementById('current-module');
+            const scanId = document.getElementById('scan-id').textContent;
+            
+            if (scanStatus && scanStatus.classList.contains('in_progress') || scanStatus.classList.contains('queued')) {
+                // Poll for updates every 3 seconds
+                const statusInterval = setInterval(function() {
+                    fetch('/api/status/' + scanId)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Update progress
+                            if (progressBar) {
+                                progressBar.style.width = data.progress + '%';
+                            }
+                            if (progressText) {
+                                progressText.textContent = data.progress + '% complete';
+                            }
+                            
+                            // Update current module if available
+                            if (currentModule && data.current_module) {
+                                currentModule.textContent = 'Current task: ' + data.current_module.replace(/_/g, ' ');
+                            }
+                            
+                            // Update status
+                            if (data.status !== scanStatus.classList[1]) {
+                                scanStatus.classList.remove(scanStatus.classList[1]);
+                                scanStatus.classList.add(data.status);
+                                
+                                if (data.status === 'completed') {
+                                    scanStatus.textContent = 'Completed';
+                                    clearInterval(statusInterval);
+                                    // Reload the page to show results
+                                    window.location.reload();
+                                } else if (data.status === 'failed') {
+                                    scanStatus.textContent = 'Failed';
+                                    clearInterval(statusInterval);
+                                    // Show error message
+                                    if (data.error) {
+                                        currentModule.textContent = 'Error: ' + data.error;
+                                        currentModule.style.color = 'var(--error-color)';
+                                    }
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching status:', error);
+                        });
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

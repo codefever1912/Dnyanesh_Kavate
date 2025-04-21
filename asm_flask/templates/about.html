@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Attack Surface Monitoring Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>ASM Tool</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="{{ 'active' if request.path == url_for('home') else '' }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.path == url_for('dashboard') else '' }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('documentation') }}" class="{{ 'active' if request.path == url_for('documentation') else '' }}">Documentation</a></li>
+                    <li><a href="{{ url_for('about') }}" class="{{ 'active' if request.path == url_for('about') else '' }}">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif category == 'error' %}
+                        <i class="fas fa-exclamation-circle"></i>
+                    {% elif category == 'info' %}
+                        <i class="fas fa-info-circle"></i>
+                    {% elif category == 'warning' %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% endif %}
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h1>About the Attack Surface Monitoring Tool</h1>
+                
+                <div class="about-intro">
+                    <p>The Attack Surface Monitoring (ASM) Tool is a comprehensive solution designed to help security professionals, developers, and organizations monitor and analyze their attack surface. By providing detailed reconnaissance, risk scoring, and AI-powered analysis, the ASM Tool helps identify security vulnerabilities and potential threats before they can be exploited.</p>
+                </div>
+                
+                <div class="about-features">
+                    <h2>Key Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-search"></i>
+                            <h3>Comprehensive Reconnaissance</h3>
+                            <p>Subdomain enumeration, port scanning, service fingerprinting, and more</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-robot"></i>
+                            <h3>AI-Powered Analysis</h3>
+                            <p>Intelligent risk assessment and actionable recommendations</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-lock"></i>
+                            <h3>Security Auditing</h3>
+                            <p>SSL/TLS analysis, HTTP header security, and sensitive path discovery</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Detailed Reports</h3>
+                            <p>Interactive HTML, Markdown, and JSON reports with visual indicators</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-team">
+                    <h2>Our Mission</h2>
+                    <p>Our mission is to make advanced security tools accessible to everyone. We believe that by providing easy-to-use, comprehensive security tools, we can help organizations of all sizes improve their security posture and protect themselves from cyber threats.</p>
+                    
+                    <p>The ASM Tool was developed with a focus on usability, flexibility, and comprehensive coverage. Whether you're a security professional looking for detailed reconnaissance or a developer wanting to check your application's security, the ASM Tool provides the features you need.</p>
+                </div>
+                
+                <div class="about-usage">
+                    <h2>How to Use</h2>
+                    <p>Using the ASM Tool is simple:</p>
+                    <ol>
+                        <li>Enter a domain name or upload a CSV file with multiple domains</li>
+                        <li>Select the reconnaissance modules you want to run</li>
+                        <li>Choose your preferred output format</li>
+                        <li>Start the scan and wait for the results</li>
+                        <li>Review the detailed reports and implement the recommended security improvements</li>
+                    </ol>
+                    
+                    <p>For more detailed instructions, check out our <a href="{{ url_for('documentation') }}">documentation</a>.</p>
+                </div>
+                
+                <div class="about-contact">
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions, feedback, or suggestions, we'd love to hear from you!</p>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:contact@asmtool.com">contact@asmtool.com</a></p>
+                    <p><i class="fas fa-globe"></i> Website: <a href="https://www.asmtool.com">www.asmtool.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>ASM Tool</h2>
+                    <p>Comprehensive Attack Surface Monitoring</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+                        <li><a href="{{ url_for('about') }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> contact@asmtool.com</p>
+                    <p><i class="fas fa-globe"></i> www.asmtool.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Attack Surface Monitoring Tool. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Flash message auto-dismiss
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashMessages = document.querySelectorAll('.flash');
+            flashMessages.forEach(message => {
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                    message.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        message.remove();
+                    }, 300);
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

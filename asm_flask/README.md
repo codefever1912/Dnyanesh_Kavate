@@ -93,7 +93,7 @@ python cli.py --help
 #### Start the web server:
 
 ```bash
-python api.py
+python app.py
 ```
 
 Then open your browser and navigate to `http://localhost:8000`
